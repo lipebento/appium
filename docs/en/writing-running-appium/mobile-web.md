@@ -67,10 +67,11 @@ by Apple, and Instruments cannot launch it on real devices. Once Safari has
 been launched by SafariLauncher, the Remote Debugger automatically connects
 using the
 [ios-webkit-debug-proxy](https://github.com/google/ios-webkit-debug-proxy).
-When working with ios-webkit-debug-proxy, you have to trust the machine before
+When working with `ios-webkit-debug-proxy`, you have to trust the machine before
 you can can run tests against your iOS device.
 
- For instruction on how to install and run ios-webkit-debugger-proxy see [iOS webKit debug proxy](/docs/en/advanced-concepts/ios-webkit-debug-proxy.md) documentation.
+For instruction on how to install and run ios-webkit-debugger-proxy see
+[iOS WebKit debug proxy](/docs/en/advanced-concepts/ios-webkit-debug-proxy.md) documentation.
 
 ### Setup
 
@@ -78,28 +79,8 @@ Before you can run your tests against Safari on a real device you will need to:
 
 * Have the **ios-webkit-debug-proxy** installed, running and listening on port 27753 (see the
 [hybrid docs](/docs/en/advanced-concepts/hybrid.md#execution-against-a-real-ios-device) for instructions)
-* Turn on **web inspector** on iOS device (**settings > safari >
-advanced**)
-* Create a **provisioning profile** that can be used to deploy the SafariLauncherApp.
-
-To create a profile for the launcher go into the **Apple Developers Member Center** and:
-
-  * **Step 1:** Create a **new App Id** and select the WildCard App ID option and set it to "*"
-  * **Step 2:** Create a **new Development Profile** and for App Id select the one created in step 1.
-  * **Step 3:** Select your **certificate(s) and device(s)** and click next.
-  * **Step 4:** Set the profile name and **generate the profile**.
-  * **Step 5:** Download the profile and open it with a text editor.
-  * **Step 6:** Search for the **UUID** and the string for it is your **identity code**.
-
-Now simply include your UDID and device name in your desired capabilities:
-
-```center
-{
-  "udid": '...',
-  "deviceName": '...',
-  "browserName": "Safari"
-}
-```
+* Turn on **web inspector** on iOS device (**settings > safari > advanced**)
+* Make sure that `SafariLauncher` will work (see the [SafariLauncher docs](safari-launcher.md) for instructions)
 
 ### Running your test
 
@@ -178,7 +159,7 @@ class ContextTests extends PHPUnit_Extensions_AppiumTestCase
 Pre-requisites:
 
 *  Make sure Chrome (an app with the package `com.android.chrome`) is installed on your device or emulator. Getting Chrome for the x86 version of the emulator is not currently possible without building Chromium, so you may want to run an ARM emulator and then copy a Chrome APK from a real device to get Chrome on an emulator.
-*  If downloaded from [NPM](https://www.npmjs.org/package/appium), or running from the [.app](https://github.com/appium/appium-dot-app), nothing needs to be done. If running from source, `npm install` will download ChromeDriver and put it in `node_modules/appium-chromedriver/chromedriver/<OS name>/` for users having npm v3+ and for npm v2 it will be in `node_modules/appium-android-driver/node_modules/appium-chromedriver/chromedriver/<OS name>/`. A particular version can be specified by passing the `--chromedriver_version` config property (e.g., `npm install appium --chromedriver_version="2.16"`), otherwise the most recent one will be retrieved.
+*  Chromedriver needs to be installed and configured for automating the specific version of Chrome available on the device. See [here](/docs/en/advanced-concepts/chromedriver.md) for more information and details.
 
 Then, use desired capabilities like these to run your test in Chrome:
 
